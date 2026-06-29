@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Create a central Axios instance
-const API = axios.create({
+const api = axios.create({
   baseURL: "https://hirehub-job-portal-production.up.railway.app"
 });
 
