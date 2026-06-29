@@ -19,10 +19,10 @@ export default function Register() {
 
     try {
       // 1. Register the user
-      await api.post('/auth/register', { name, email, password, role });
+      await api.post('/api/auth/register', { name, email, password, role });
       
       // 2. Automatically log them in after registration
-      const response = await api.post('/auth/login', { email, password });
+      const response = await api.post('/api/auth/login', { email, password });
       const userData = response.data;
       
       login(userData.token, { id: userData.id, email: userData.email, role: userData.role });
