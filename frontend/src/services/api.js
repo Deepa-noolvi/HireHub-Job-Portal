@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Create a central Axios instance
-const api = axios.create({
-  baseURL: 'http://localhost:8080/api', // Our Spring Boot backend URL
+const API = axios.create({
+  baseURL: "https://hirehub-job-portal-production.up.railway.app"
 });
 
 // Request Interceptor: Automatically attach the JWT token to every outgoing request
