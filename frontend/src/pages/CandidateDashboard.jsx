@@ -32,7 +32,7 @@ export default function CandidateDashboard() {
   const fetchJobs = async () => {
     setLoading(true);
     try {
-      const response = await api.get('/public/jobs', {
+      const response = await api.get('/api/public/jobs', {
         params: { keyword, location, category }
       });
       setJobs(response.data);
@@ -46,7 +46,7 @@ export default function CandidateDashboard() {
   const fetchMyApplications = async () => {
     if (!user) return;
     try {
-      const response = await api.get('/candidate/applications');
+      const response = await api.get('/api/candidate/applications');
       setMyApplications(response.data);
     } catch (err) {
       console.error('Failed to fetch applications', err);
@@ -73,7 +73,7 @@ export default function CandidateDashboard() {
       const formData = new FormData();
       formData.append('resume', resume);
 
-      await api.post(`/candidate/jobs/${selectedJob.id}/apply`, formData, {
+      await api.post(`/api/candidate/jobs/${selectedJob.id}/apply`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setActionMessage('Application submitted successfully!');
@@ -87,7 +87,7 @@ export default function CandidateDashboard() {
 
   const handleSaveJob = async () => {
     try {
-      await api.post(`/candidate/jobs/${selectedJob.id}/save`);
+      await api.post(`/api/candidate/jobs/${selectedJob.id}/save`);
       setActionMessage('Job saved successfully!');
     } catch (err) {
       setActionMessage(err.response?.data?.message || 'Failed to save job. You may have already saved it.');
