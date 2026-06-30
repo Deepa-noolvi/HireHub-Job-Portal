@@ -8,7 +8,7 @@ The application features **JWT-based authentication**, **role-based authorizatio
 
 ## 🌐 Live Demo
 
-**Frontend:** https://hire-hub-job-portal-ochre.vercel.app/
+https://hire-hub-job-portal-ochre.vercel.app/
 
 ---
 
