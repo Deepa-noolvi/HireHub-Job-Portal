@@ -21,7 +21,7 @@ export default function RecruiterDashboard() {
   // Fetch Jobs on Load
   const fetchMyJobs = async () => {
     try {
-      const res = await api.get('/jobs/my-jobs');
+      const res = await api.get('/api/jobs/my-jobs');
       setJobs(res.data);
       if(res.data.length > 0 && !selectedJobId) {
           setSelectedJobId(res.data[0].id);
@@ -46,7 +46,7 @@ export default function RecruiterDashboard() {
 
   const fetchApplications = async (jobId) => {
     try {
-      const res = await api.get(`/applications/job/${jobId}`);
+      const res = await api.get(`/api/applications/job/${jobId}`);
       setApplications(res.data);
     } catch (err) {
       console.error(err);
@@ -62,10 +62,10 @@ export default function RecruiterDashboard() {
     e.preventDefault();
     try {
       if (editingJobId) {
-        await api.put(`/jobs/${editingJobId}`, formData);
+        await api.put(`/api/jobs/${editingJobId}`, formData);
         setMessage('Job updated successfully!');
       } else {
-        await api.post('/jobs', formData);
+        await api.post('/api/jobs', formData);
         setMessage('Job created successfully!');
       }
       setFormData({title: '', description: '', location: '', category: '', salary: '', skills: '', experience: ''});
@@ -90,7 +90,7 @@ export default function RecruiterDashboard() {
   const deleteJob = async (id) => {
     if(!window.confirm("Are you sure you want to delete this job?")) return;
     try {
-      await api.delete(`/jobs/${id}`);
+      await api.delete(`/api/jobs/${id}`);
       fetchMyJobs();
     } catch (err) {
       alert("Failed to delete job.");
@@ -99,7 +99,7 @@ export default function RecruiterDashboard() {
 
   const toggleVisibility = async (id) => {
     try {
-      await api.patch(`/jobs/${id}/toggle-visibility`);
+      await api.patch(`/api/jobs/${id}/toggle-visibility`);
       fetchMyJobs();
     } catch (err) {
       alert("Failed to toggle visibility.");
@@ -109,7 +109,7 @@ export default function RecruiterDashboard() {
   // Handlers for Applications
   const updateAppStatus = async (appId, status) => {
     try {
-      await api.patch(`/applications/${appId}/status`, { status });
+      await api.patch(`/api/applications/${appId}/status`, { status });
       fetchApplications(selectedJobId);
     } catch (err) {
       alert("Failed to update status.");
@@ -118,7 +118,7 @@ export default function RecruiterDashboard() {
 
   const handleDownloadResume = async (fileName) => {
       try {
-          const response = await api.get(`/applications/download-resume/${fileName}`, {
+          const response = await api.get(`/api/applications/download-resume/${fileName}`, {
               responseType: 'blob' // important for downloading files
           });
           
